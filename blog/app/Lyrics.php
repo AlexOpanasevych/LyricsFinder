@@ -12,4 +12,11 @@ class Lyrics extends Model
     public $musician;
     public $name;
 
+    public function author() {
+        return $this->hasMany('App/Author');
+    }
+
+    public function genre() {
+        return $this->hasMany('App/Genre');
+    }
 }
