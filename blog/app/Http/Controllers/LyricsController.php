@@ -24,8 +24,8 @@ class LyricsController extends Controller
         return view("lyrics_list", ['data'=>Lyrics::all()->random($id)]);
     }
 
-    function search(Request $request, $searchable){
-
+    function search(Request $request){
+        return view('lyrics_list', ['data' => Lyrics::all()->where('author', '=', $request->input('search-string'))]);
     }
 
 }

@@ -28,7 +28,7 @@ Route::get('/hello/{name}', function ($name) {
 
 Route::get('/calc/{re_string}', function ($re_string) {
     $matches = array();
-    if(preg_match('^(?!.*[\+\.]{2}.*)\d[\d\.\+]*\d$^', $re_string, $matches) == true){
+    if(preg_match('^(?!.*[+.]{2}.*)\d[\d.+]*\d$^', $re_string, $matches) == true){
         $result_arr = preg_split('/\+/', $matches[0]);
         print 'Your input: '. $matches[0] . PHP_EOL;
         print "Your result " . array_sum($result_arr);
@@ -40,11 +40,13 @@ Route::get('/calc/{re_string}', function ($re_string) {
 
 Route::get('/lyrics/all', 'LyricsController@show_list')->name('lyrics-data'); // lyrics
 Route::get('/lyrics/{id}', 'LyricsController@by_id')->name('lyrics-data-by-id'); // get by id
-
+Route::post('/search', 'LyricsController@search')->name('lyrics_search');
 
 Route::get('/signin', function (){
     return view('login');
 })->name('lyrics-signin');
-Route::post('/signin', function (Request $request){
+Route::post('/signin', function (){
     return redirect()->route('home')->with('success', 'Успішно!');
 })->name('lyrics-form');
+
+
